@@ -46,17 +46,6 @@
         const toCurrency = toCurrencyInput.value;
         const amount = parseFloat(amountInput.value);
 
-        // let errorsArray = validateUserInput(
-        //   fromCurrencyInputValue,
-        //   toCurrencyInputValue
-        // );
-
-        // if (errorsArray.length > 0) {
-        //   outputContainer.classList.add("errors");
-        //   outputContainer.innerHTML = errorsArray.join("<br>");
-        //   return;
-        // }
-
         let convertedAmount;
         switch (fromCurrency) {
           case "USD":
@@ -75,11 +64,12 @@
           default:
             break;
         }
-        
+
         result.innerHTML = `${amount} ${fromCurrency} = ${convertedAmount} ${toCurrency}`;
-      if (isNaN(amount) || amount <= 0) {
+        if (isNaN(amount) || amount <= 0) {
           result.innerHTML = "Ievadi derīgu daudzumu";
-        }}
+        }
+      }
     </script>
   </body>
 </html>
