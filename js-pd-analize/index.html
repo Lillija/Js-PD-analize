@@ -46,6 +46,11 @@
         const toCurrency = toCurrencyInput.value;
         const amount = parseFloat(amountInput.value);
 
+        if (isNaN(amount) || amount <= 0) {
+          result.innerHTML = "Ievadi derīgu daudzumu";
+          return;
+        }
+
         let convertedAmount;
         switch (fromCurrency) {
           case "USD":
@@ -66,9 +71,6 @@
         }
 
         result.innerHTML = `${amount} ${fromCurrency} = ${convertedAmount} ${toCurrency}`;
-        if (isNaN(amount) || amount <= 0) {
-          result.innerHTML = "Ievadi derīgu daudzumu";
-        }
       }
     </script>
   </body>
