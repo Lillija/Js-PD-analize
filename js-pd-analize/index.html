@@ -31,6 +31,7 @@
 
       <button id="convert-btn">Konvertēt</button>
       <div id="result"></div>
+      <p id="history"></p>
     </div>
     <script>
       const fromCurrencyInput = document.getElementById("from-currency");
@@ -38,6 +39,8 @@
       const button = document.getElementById("convert-btn");
       const amountInput = document.getElementById("amount");
       const result = document.getElementById("result");
+
+      let historyArray = [];
 
       button.addEventListener("click", handleClick);
 
@@ -51,26 +54,28 @@
           return;
         }
 
-        let convertedAmount;
-        switch (fromCurrency) {
+        let convertedAmount = convertCurrency(fromCurrency, toCurrency, amount);
+        let resultText = `${amount} ${fromCurrency} = ${convertedAmount} ${toCurrency}`;
+
+        result.innerHTML = resultText;
+        historyArray.push(resultText);
+
+        displayHistory();
+      }
+      function convertCurrency(from, to, amount) {
+        switch (from) {
           case "USD":
-            convertedAmount =
-              amount * { EUR: 0.85, GBP: 0.75, USD: 1 }[toCurrency];
-            break;
+            return amount * { EUR: 0.85, GBP: 0.75, USD: 1 }[to];
+
           case "EUR":
-            convertedAmount =
-              amount * { USD: 1.18, GBP: 0.88, EUR: 1 }[toCurrency];
-            break;
+            return amount * { USD: 1.18, GBP: 0.88, EUR: 1 }[to];
+
           case "GBP":
-            convertedAmount =
-              amount * { USD: 1.33, EUR: 1.14, GBP: 1 }[toCurrency];
-            break;
-
-          default:
-            break;
+            return amount * { USD: 1.33, EUR: 1.14, GBP: 1 }[to];
         }
-
-        result.innerHTML = `${amount} ${fromCurrency} = ${convertedAmount} ${toCurrency}`;
+      }
+      function displayHistory() {
+        history.innerHTML = historyArray.join("<br>");
       }
     </script>
   </body>
